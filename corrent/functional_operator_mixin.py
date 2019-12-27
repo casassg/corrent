@@ -4,7 +4,8 @@ from airflow.models.baseoperator import BaseOperator
 
 from corrent.xcom_arg import XComArg
 
-def _resolve(context:dict, value: Any, recursion=True):
+
+def _resolve(context: dict, value: Any, recursion=True):
   """Given an object "value", it resolves if it's a XComArg or does recursion if list or tuple.
   """
   if isinstance(value, XComArg):
@@ -17,7 +18,7 @@ def _resolve(context:dict, value: Any, recursion=True):
     return value
 
 
-def _add_dependent(value: Any, dependent: BaseOperator, recursion:bool=True):
+def _add_dependent(value: Any, dependent: BaseOperator, recursion: bool = True):
   """Given an object "value", it adds a dependent if it's an XComArg.
 
   Recurses tuples and dictionaries.
@@ -59,7 +60,7 @@ class FunctionalOperatorMixin:
       resolved = {k: _resolve(context, v) for k, v in kwargs.items()}
       self.__dict__.update(resolved)
       return original_exec(context)
-    
+
     self.execute = custom_execute
     self.pre_execute = custom_pre_execute
 

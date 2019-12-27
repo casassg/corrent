@@ -1,6 +1,5 @@
 """
-Code that goes along with the Airflow tutorial located at:
-https://github.com/apache/airflow/blob/master/airflow/example_dags/tutorial.py
+Airflow functional test DAG. Simple list generator and add 1. 
 """
 from datetime import datetime, timedelta
 from typing import List
@@ -40,7 +39,7 @@ def print_result(result: List[int]) -> None:
 with DAG(
     'corrent_test', default_args=default_args, schedule_interval=None
 ) as dag:
-  l = generate_list()
+  l = generate_list(10)
   print_generated = copy_operation(print_result, "print_generated")
   print_generated(l)
   l1 = add_one_list(l)

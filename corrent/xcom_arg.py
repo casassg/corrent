@@ -11,7 +11,6 @@ class XComArg:
   arg = XComArg(op)
   arg2 = arg["pushed_value"]
   """
-
   def __init__(self, operator: BaseOperator, key: str = XCOM_RETURN_KEY):
     self._operator = operator
     self._key = key
