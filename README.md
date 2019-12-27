@@ -28,7 +28,7 @@ Here's an example DAG with Corrent Functional API. This will compile on Airflow 
 ```python
 from airflow import DAG
 
-from corrent.decorators import operation
+from corrent.decorators import operation, copy_operation
 from corrent.core import inject
 
 inject()
@@ -48,11 +48,23 @@ def print_result(result: List[int]) -> None:
   print(result)
 
 
-with DAG("test", schedule_interval=None) as dag:
+with DAG("corrent_test", schedule_interval=None) as dag:
   l = generate_list(10)
-  l2 = add_one(l)
-  print_results(l2)
+
+  print_generated = copy_operation(print_result, "print_generated")
+  print_generated(l)
+
+  l1 = add_one_list(l)
+
+  print_result(l1)
+
 ```
+
+[Full DAG here](corrent/dags/corrent_test.py)
+
+### DAG on Airflow UI
+
+![Maintainability](docs/images/corrent_test_dag.png)
 
 ## Development environment
 Requirements: `python3.7`, `pipenv`
