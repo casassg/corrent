@@ -39,7 +39,7 @@ def generate_list(length: int = 5) -> List[int]:
 
 
 @operation
-def add_one(int_list: List[int]) -> List[int]:
+def add_one_list(int_list: List[int]) -> List[int]:
   return [i + 1 for i in int_list]
 
 
