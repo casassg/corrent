@@ -2,6 +2,17 @@
 
 Corrent is an Airflow functional DAG API. 
 
+## Purpose
+
+This is an experiment of mine to come up with an alternative API that make Data pipelines on Airflow easier by abstracting away some XCom operations and PythonOperator operations. 
+
+## Next steps
+
+- Add unit tests
+- Create DAG using a more complex operator together with the `operation` operators and several xcom arguments.
+- Add template compatibility on `XComArg` (understand better how to do it)
+- Explore making an abstraction on top of PySpark that caches, and passes references to the stored datasets in the same session (needs to dig deeper)
+
 ## Features
 - Functional extension for Airflow DAGs.
 - Compatible with existing Airflow DAGs.
