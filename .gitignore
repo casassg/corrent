@@ -1,0 +1,8 @@
+.DS_Store
+airflow_home
+__pycache__
+Pipfile.lock
+.env
+.vscode
+.idea
+.local
