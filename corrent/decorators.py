@@ -4,26 +4,18 @@ from typing import Callable, Optional
 from airflow.operators.python_operator import PythonOperator
 
 from corrent.core import inject
+from corrent.operators import PythonFunctionalOperator
 
+def operation(*args, **kwargs):
+  if len(args)>1 and not callable(args[0]):
+    raise Exception('No args allowed to specify arguments for PythonOperator')
 
-def operation(f):
-  """Python wrapper to generate PythonOperators out of simple python functions.
-  Used for Airflow functional interface
-  """
-  @functools.wraps(f)
-  def python_operator_generate(
-      *args, __operator_name_internal: Optional[str] = None, **kwargs
-  ):
+  def wrapper(f):
+    """Python wrapper to generate PythonOperators out of simple python functions.
+    Used for Airflow functional interface
+    """
     inject()
-    op = PythonOperator(
-        python_callable=f, task_id=__operator_name_internal or f.__name__
-    )
-    return op(op_args=args, op_kwargs=kwargs)
-
-  return python_operator_generate
-
-
-def copy_operation(task: Callable, name: str):
-  """Helper function to copy tasks created using the task decorator.
-  """
-  return functools.partial(task, __operator_name_internal=name)
+    return PythonFunctionalOperator(python_callable=f, task_id=f.__name__, **kwargs)
+  if len(args) == 1 and callable(args[0]):
+    return wrapper(args[0])
+  return wrapper

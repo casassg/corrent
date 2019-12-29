@@ -33,31 +33,34 @@ from corrent.core import inject
 
 inject()
 
-@operation
-def generate_list(length: int = 5) -> List[int]:
-  return list(range(length))
 
-
-@operation
-def add_one_list(int_list: List[int]) -> List[int]:
-  return [i + 1 for i in int_list]
-
-
-@operation
-def print_result(result: List[int]) -> None:
-  print(result)
 
 
 with DAG("corrent_test", schedule_interval=None) as dag:
+  @operation
+  def generate_list(length: int = 5) -> List[int]:
+    return list(range(length))
+
+
+  @operation
+  def add_one_list(int_list: List[int]) -> List[int]:
+    return [i + 1 for i in int_list]
+
+
+  @operation
+  def print_result(result: List[int]) -> None:
+    print(result)
+
   l = generate_list(10)
 
-  print_generated = copy_operation(print_result, "print_generated")
+  print_generated = print_result.copy('print_generated')
   print_generated(l)
 
   l1 = add_one_list(l)
 
   print_result(l1)
 
+  print_result << print_generated
 ```
 
 [Full DAG here](corrent/dags/corrent_test.py)

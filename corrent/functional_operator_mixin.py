@@ -1,6 +1,7 @@
 from typing import Any
 
 from airflow.models.baseoperator import BaseOperator
+from airflow import settings
 
 from corrent.xcom_arg import XComArg
 
