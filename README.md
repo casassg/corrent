@@ -6,7 +6,7 @@ Corrent is an Airflow functional DAG API.
 
 This is an experiment of mine to come up with an alternative API that make Data pipelines on Airflow easier by abstracting away some XCom operations and PythonOperator operations. 
 
-**Fun fact**:_ Less than 200 lines of code under _corrent_ folder, take a peak 👀
+**Fun fact**: Less than 200 lines of code under _[corrent](corrent)_ folder, take a peak 👀
 
 ## Next steps
 
