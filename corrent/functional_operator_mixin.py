@@ -48,6 +48,9 @@ class FunctionalOperatorMixin:
     """
     if args:
       raise Exception('No arguments are accepted, use kwargs only')
+    if getattr(self, '_has_been_called', False):
+      raise Exception('Operators can only be called once')
+    setattr(self, '_has_been_called', True)
     [_add_dependent(v, self) for v in kwargs.values()]
     original_pre_exec = self.pre_execute
     original_exec = self.execute
