@@ -12,5 +12,6 @@ class PythonFunctionalOperator(PythonOperator):
                  self).__call__(op_args=args, op_kwargs=kwargs)
 
   def copy(self, task_id: str):
-    return PythonFunctionalOperator(python_callable=self.python_callable, task_id=task_id)
-
+    return PythonFunctionalOperator(
+        python_callable=self.python_callable, task_id=task_id
+    )
