@@ -63,7 +63,7 @@ with DAG("corrent_test", schedule_interval=None) as dag:
   print_result << print_generated
 ```
 
-[Full DAG here](corrent/dags/corrent_test.py)
+[View example DAGs here](dags/)
 
 ### DAG on Airflow UI
 
