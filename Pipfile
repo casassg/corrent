@@ -7,7 +7,7 @@ verify_ssl = true
 yapf = "*"
 
 [packages]
-apache-airflow = "*"
+apache-airflow = "1.10.7"
 
 [requires]
 python_version = "3.7"
